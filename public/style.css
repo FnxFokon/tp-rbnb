@@ -17,3 +17,23 @@ a{
 }
 
 /* ------------------------------------------------ */
+
+#container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hoover_typebien:hover{
+    background-color: white;
+}
+
+.logo{
+    width: 150px;
+
+}
+
+.logout{
+    color: #fff;
+}

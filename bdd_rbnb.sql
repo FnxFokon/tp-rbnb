@@ -25,7 +25,7 @@ CREATE TABLE
         `id` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         `titre` VARCHAR(150) NOT NULL,
         `addresse` VARCHAR(255) NOT NULL,
-        `description` VARCHAR(150) NOT NULL,
+        `description` TEXT NOT NULL,
         `prix` INT(10) NOT NULL,
         `taille` INT(10) NOT NULL,
         `nbr_piece` INT(10) NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `photo` (
         `id` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `image_path` INT(10) NOT NULL,
-        `slug` INT(10) NOT NULL,
+        `image_path` VARCHAR(255) NOT NULL,
+        `slug` VARCHAR(255) NOT NULL,
         `bien_id` INT(10) NOT NULL,
         FOREIGN KEY (`bien_id`) REFERENCES `bien`(`id`)
     );
@@ -57,8 +57,8 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `reservation` (
         `id` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `date_debut` DATE NOT NULL,
-        `date_fin` DATE NOT NULL,
+        `date_debut` INT(10) NOT NULL,
+        `date_fin` INT(10) NOT NULL,
         `bien_id` INT(10) NOT NULL,
         `user_id` INT(10) NOT NULL,
         FOREIGN KEY (`bien_id`) REFERENCES `bien`(`id`),

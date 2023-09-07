@@ -3,8 +3,10 @@
 namespace Core;
 
 use MiladRahimi\PhpRouter\Router;
-use Exceptions\RouteNotFindException;
+use App\Controller\BienController;
+use App\Controller\UserController;
 use Core\Database\DatabaseConfigInterface;
+use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
 use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
 
 class App implements DatabaseConfigInterface
@@ -12,7 +14,7 @@ class App implements DatabaseConfigInterface
 
     // On va déclarer des constantes pour la connexion à la base de données
     private const DB_HOST = 'database';
-    private const DB_NAME = 'site_jvd';
+    private const DB_NAME = 'bdd_rbnb';
     private const DB_USER = 'admin';
     private const DB_PASS = 'admin';
 
@@ -73,9 +75,10 @@ class App implements DatabaseConfigInterface
         // On crée la route pour la page d'accueil avec le controlleur
         // Exemple d'une route
         // $this->router->get('/', [ToyController::class, 'index']);
-        $this->router->get('/', function () {
-            return 'Hello World';
-        });
+        $this->router->get('/', [BienController::class, 'index']);
+
+        $this->router->get('/user/login', [UserController::class, 'login']);
+        $this->router->get('/user/signin', [UserController::class, 'signin']);
     }
 
     // 3: Méthode startRouter (démarrage du router)
@@ -83,7 +86,7 @@ class App implements DatabaseConfigInterface
     {
         try {
             $this->router->dispatch();
-        } catch (RouteNotFindException $e) {
+        } catch (RouteNotFoundException $e) {
             echo $e->getMessage();
         } catch (InvalidCallableException $e) {
             echo $e->getMessage();
